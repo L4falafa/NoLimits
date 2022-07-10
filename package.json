@@ -1,0 +1,18 @@
+{
+  "name": "nolimits",
+  "version": "0.0.1",
+  "description": "Sistema de gestion mediante pagina web Responsive de suscripciones, videos, sucursales y personal para la cadena de gimnasios No-Limits",
+  "main": "App.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon App.js"
+  },
+  "author": "Antu Ponturo",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "handlebars": "^4.7.7",
+    "hbs": "^4.2.0",
+    "mysql": "^2.18.1"
+  }
+}
