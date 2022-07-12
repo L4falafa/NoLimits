@@ -2,7 +2,7 @@
 const express = require('express')
 const hbs = require('hbs');
 const bodyParser = require("body-parser")
-const mysql = require('mysql');
+const dbManager = require('./models/dbManager.js');
 const path = require('path');
 const config = require('./config/Config.js');
 
@@ -32,11 +32,13 @@ const personal = require('./routes/personal');
 app.use('/personal', personal);
 
 //Ruta default
-app.get('/inicio', (req, res) => {
+app.get('/inicio', async (req, res) => {
+    console.log(await dbManager.mySqlQueryAsync("SELECT * FROM USUARIOS"));
     res.render('inicio', {})
 })
 
 //Inicio de aplicacion escuchando
 app.listen(port, () => {
+  dbManager.testConnection();
   console.log(`Escuchando en el puerto ${port}`)
 })

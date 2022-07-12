@@ -3,7 +3,7 @@ let config = {
     databaseMySql:{
         host: "localhost",
         user: "root",
-        database: "sensores"        
+        database: "nolimits"        
     },
     //Puerto de la aplicacion express
 	port: 3000,
