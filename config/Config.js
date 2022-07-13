@@ -1,4 +1,6 @@
 let config = {
+    //Token Secreto
+    TOKEN_SECRET: process.env.TOKEN_SECRET || "tokenultrasecreto",
     //Configuracion para la conexion a la DB Mysql
     databaseMySql:{
         host: "localhost",

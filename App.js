@@ -36,8 +36,7 @@ app.use('/auth', auth);
 
 //Ruta default
 app.get('/inicio', async (req, res) => {
-    var response = await dbManager.mySqlQueryAsync("SELECT * FROM USUARIOS");
-    console.log(response[0].nombre);
+
     res.render('formulario', {})
 })
 
