@@ -29,12 +29,16 @@ app.use(express.static(__dirname + "/public"));
 
 //Rutas a utilizar
 const personal = require('./routes/personal');
+const auth = require('./routes/auth');
+
 app.use('/personal', personal);
+app.use('/auth', auth);
 
 //Ruta default
 app.get('/inicio', async (req, res) => {
-    console.log(await dbManager.mySqlQueryAsync("SELECT * FROM USUARIOS"));
-    res.render('inicio', {})
+    var response = await dbManager.mySqlQueryAsync("SELECT * FROM USUARIOS");
+    console.log(response[0].nombre);
+    res.render('formulario', {})
 })
 
 //Inicio de aplicacion escuchando

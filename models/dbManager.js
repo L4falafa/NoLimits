@@ -37,7 +37,7 @@ module.exports = {
         try {
             return await mySqlQueryAsync(qry);
         } catch (error) {
-            throw error;   
+            return error;   
         }
     },
 
@@ -67,8 +67,8 @@ module.exports = {
             //returns the result
             return await mySqlQueryAsync(qry);
         } catch (error) {
-
-            return null;
+            
+            return error;
         }
     },
     mySqlQueryAsync: async (query) => { return await mySqlQueryAsync(query) }
