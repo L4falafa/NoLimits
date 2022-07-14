@@ -10,14 +10,14 @@
  </head>
  <body>
    <h1>Test Formulario</h1>
-      <form action="/auth/signup" method="post">
+      <form  autocomplete="on" >
         <label for="email" id="email">E-Mail:</label>
         <input type="email" name="email" id="email">
         <label for="password" id="password">Password:</label>
         <input type="password" name="password" id="password">    
-        <button type="submit" id="enviar" >Subir</button>   
+        <button type="submit" onclick='submitForm()' id="enviar" >Subir</button>   
       </form>
    <!--Import Css-->     
-   <script src="/public/js/inicio.js"></script>
+   <script src="/js/login.js"></script>
  </body>
  </html>

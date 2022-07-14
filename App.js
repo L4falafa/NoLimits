@@ -37,7 +37,12 @@ app.use('/auth', auth);
 //Ruta default
 app.get('/inicio', async (req, res) => {
 
-    res.render('formulario', {})
+    res.render('inicio', {})
+})
+
+app.get('/formulario', async (req, res) => {
+
+  res.render('formulario', {})
 })
 
 //Inicio de aplicacion escuchando
