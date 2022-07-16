@@ -1,39 +1,37 @@
-function httpGet(theUrl) {
-    let xmlHttpReq = new XMLHttpRequest();
-    xmlHttpReq.open("GET", theUrl, false); 
-    xmlHttpReq.send();
-    return xmlHttpReq.responseText;
-}
 
-async function httpPost (theUrl,data,callback) {
-    let xmlHttpReq = new XMLHttpRequest();
-    
-    xmlHttpReq.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            callback(this);
-        }
-        
-     };
-    xmlHttpReq.open("POST", theUrl, true);
-    xmlHttpReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlHttpReq.send(data);
-}
+//Guarda una cookie con nombre y valor, se ponen los dias de expiracion
+function setCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
 
 
-
-
+//Sube los datos al formulario con axios mediante una reques HTTP Post
 function submitForm() {
-    oForm = document.forms[0];
-    var email = oForm.elements["email"].value;
-    var password = oForm.elements["password"].value;;
-    
-    var data = "email="+email+"&password="+password
-    console.log(data)
-    console.log("data")
-    httpPost('http://localhost:3000/auth/login', data,(res)=>{
-    console.log(res.responseText);
+  //Saca los datos del formulario
+  oForm = document.forms[0];
+  var email = oForm.elements["email"].value;
+  var password = oForm.elements["password"].value;
+
+//Reques post
+  axios.post("/auth/login",
+        {
+            email: email,
+            password: password
+        }, 
+        {
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        }
+    })
+    .then(function (res) {
+      //Guarda la cookie de autorizacion generada por service.js
+        setCookie("Authorization",`Bearer ${res.data["token"]}`,15)
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
     });
 }
-
-
-

@@ -9,7 +9,7 @@ exports.ensureAuthenticated = function (req, res, next) {
       .status(403)
       .send({ message: "Tu petición no tiene cabecera de autorización" });
   }
-
+  
   var token = req.headers.authorization.split(" ")[1];
   var payload = jwt.decode(token, config.TOKEN_SECRET);
 
@@ -18,5 +18,6 @@ exports.ensureAuthenticated = function (req, res, next) {
   }
 
   req.user = payload.sub;
+  console.log("Id: "+req.user);
   next();
 };

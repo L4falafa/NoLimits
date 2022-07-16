@@ -5,6 +5,7 @@ const bodyParser = require("body-parser")
 const dbManager = require('./models/dbManager.js');
 const path = require('path');
 const config = require('./config/Config.js');
+const middleware = require('./extras/middleware.js');
 
 //Creacion de la App express
 const app = express();
@@ -31,21 +32,25 @@ app.use(express.static(__dirname + "/public"));
 const personal = require('./routes/personal');
 const auth = require('./routes/auth');
 
-app.use('/personal', personal);
+app.use('/personal',middleware.ensureAuthenticated, personal);
 app.use('/auth', auth);
 
 //Ruta default
 app.get('/inicio', async (req, res) => {
-
     res.render('inicio', {})
 })
 
-app.get('/formulario', async (req, res) => {
 
+app.get('/formulario', async (req, res) => {
   res.render('formulario', {})
 })
 
-//Inicio de aplicacion escuchando
+//Ruta unicamente accesible si esta autenticado
+app.get('/private',middleware.ensureAuthenticated, function(req, res) {
+  console.log("Id: "+req.user);
+} );
+
+//Inicio de aplicacion escuchando 
 app.listen(port, () => {
   dbManager.testConnection();
   console.log(`Escuchando en el puerto ${port}`)
