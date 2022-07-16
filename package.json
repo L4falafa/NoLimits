@@ -4,7 +4,7 @@
   "description": "Sistema de gestion mediante pagina web Responsive de suscripciones, videos, sucursales y personal para la cadena de gimnasios No-Limits",
   "main": "App.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node App.js",
     "start": "nodemon App.js"
   },
   "author": "Antu Ponturo",
