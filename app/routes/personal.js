@@ -1,14 +1,11 @@
 var express = require('express');
 var router = express.Router();
+const personal = require("../controllers/personal") 
 
 // define the home page route
-router.get('/', function(req, res) {
-  res.send("personal")
-});
+router.get('/', personal.default);
 
 // define the about route
-router.get('/about', function(req, res) {
-  res.send('sobre el personal');
-});
+router.get('/about', personal.about);
 
 module.exports = router;
