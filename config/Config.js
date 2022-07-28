@@ -14,4 +14,4 @@ let config = {
 	timeFormat: 24
 };
 
-if (typeof module !== "undefined") {module.exports = config;}
+module.exports = config;

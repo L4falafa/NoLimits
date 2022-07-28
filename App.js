@@ -7,7 +7,7 @@ const path = require('path');
 const config = require('./config/Config.js');
 const middleware = require('./extras/middleware.js');
 
-//Creacion de la App express 
+//creacion de la aplicacion express 
 const app = express();
 const port = config.port; 
 
