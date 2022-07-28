@@ -1,4 +1,4 @@
-//Requrimiento de modulos
+//Requerimiento de modulos
 const express = require('express')
 const hbs = require('hbs');
 const bodyParser = require("body-parser")
@@ -31,28 +31,19 @@ app.use(express.static(path.join(__dirname + "/public")));
 const personal = require('./app/routes/personal');
 const auth = require('./app/routes/auth');
 const error404 = require('./app/routes/error404');
+const index = require('./app/routes/index');
 
 //Se inician las rutas con el controlador
 app.use('/personal',middleware.ensureAuthenticated, personal);
 app.use('/auth', auth);
-app.use(error404);
-//#################################
-
-
-//Ruta default
-app.get('/inicio', async (req, res) => {
-    res.render('inicio', {})
-})
-
+app.use('/inicio', index);
 
 app.get('/formulario', async (req, res) => {
   res.render('formulario', {})
 })
 
-//Ruta unicamente accesible si esta autenticado
-app.get('/private',middleware.ensureAuthenticated, function(req, res) {
-  console.log("Id: "+req.user);
-} );
+app.use(error404);
+//#################################
 
 //Inicio de aplicacion escuchando 
 app.listen(port, () => {

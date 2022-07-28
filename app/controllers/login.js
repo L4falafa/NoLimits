@@ -3,7 +3,8 @@ const service = require("../../extras/services");
 const dbManager = require('../models/dbManager.js');
 
 module.exports = {
-
+    //################# LOGIN #################
+    //Busca en la base de datos si existe el usuario y si la contraseña es correcta si es asi devuelve un token
     login: async (req,res) => {
         const { email, password } = req.body;
          
@@ -19,7 +20,8 @@ module.exports = {
         }
     },
 
-    //##################################
+    //########## SIGNUP ################
+    //Recibe los datos del usuario y los guarda en la base de datos
     signup: async  (req, res)  => {
         const { email, password } = req.body;
         var user = await dbManager.mySqlQueryAsync("SELECT * FROM usuarios WHERE email = "+"'"+email+"'");
@@ -37,7 +39,6 @@ module.exports = {
           res.send("Existe un usuario con ese nombre")
           console.log("Existe un usuario con ese nombre") 
         }
-           
-        
+                  
       }
 };
