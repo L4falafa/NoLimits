@@ -3,7 +3,7 @@ let config = {
     TOKEN_SECRET: process.env.TOKEN_SECRET || "tokenultrasecreto",
     //Configuracion para la conexion a la DB Mysql
     databaseMySql:{
-        host: "localhost",
+        host: "host.docker.internal",
         user: "root",
         database: "nolimits"        
     },
@@ -14,4 +14,4 @@ let config = {
 	timeFormat: 24
 };
 
-if (typeof module !== "undefined") {module.exports = config;}
+module.exports = config;

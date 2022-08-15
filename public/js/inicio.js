@@ -23,9 +23,7 @@ function sendToPersonal() {
             headers: {"Authorization" : `${getCookie("Authorization")}`} 
         })
         .then(function (res) {
-            console.log(res.data);
             document.write(res.data);
-            console.log("a");
             window.history.pushState("", "", '/personal');
         })
         .catch(function (error) {

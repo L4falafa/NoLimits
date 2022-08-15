@@ -2,7 +2,7 @@
 //Se encarga del manejo de la base de datos actualmente usando MySql
 const { query } = require('express');
 const mysql = require('mysql');
-const config = require('../config/Config.js');
+const config = require('../../config/Config');
 
 //Configuracion de la base de datos por el archivo Config.js
 var con = mysql.createConnection({
@@ -27,10 +27,14 @@ async function mySqlQueryAsync (query){
 //Exportar modulo
 module.exports = {
     testConnection: ()  => {
-        con.connect(function(err) {
-            if (err) throw err;
-            console.log("Connected to the database: "+ config.databaseMySql.host);
-          }); 
+        try {
+            con.connect(function() {
+                console.log("Connected to the database: "+ config.databaseMySql.host);
+              }); 
+        } catch (error) {
+            console.log(error);
+        }
+        
     },
     getAllFromTable: async (tableName)=>{
         qry = "SELECT * FROM "+tableName;
