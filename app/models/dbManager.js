@@ -27,10 +27,14 @@ async function mySqlQueryAsync (query){
 //Exportar modulo
 module.exports = {
     testConnection: ()  => {
-        con.connect(function(err) {
-            if (err) throw err;
-            console.log("Connected to the database: "+ config.databaseMySql.host);
-          }); 
+        try {
+            con.connect(function() {
+                console.log("Connected to the database: "+ config.databaseMySql.host);
+              }); 
+        } catch (error) {
+            console.log(error);
+        }
+        
     },
     getAllFromTable: async (tableName)=>{
         qry = "SELECT * FROM "+tableName;
