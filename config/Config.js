@@ -3,9 +3,9 @@ let config = {
     TOKEN_SECRET: process.env.TOKEN_SECRET || "tokenultrasecreto",
     //Configuracion para la conexion a la DB Mysql
     databaseMySql:{
-        host: "host.docker.internal",
+        host: "localhost",
         user: "root",
-        database: "nolimits"        
+        database: "inetbeeacons"        
     },
     //Puerto de la aplicacion express
 	port: 3000,

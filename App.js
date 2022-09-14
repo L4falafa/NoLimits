@@ -32,11 +32,32 @@ const personal = require('./app/routes/personal');
 const auth = require('./app/routes/auth');
 const error404 = require('./app/routes/error404');
 const index = require('./app/routes/index');
+//Web Manager Routes
+const beepcons = require('./app/routes/beepcons');
+const exposiciones = require('./app/routes/exposiciones');
+const visitas = require('./app/routes/visitas');
+const reservas = require('./app/routes/reservas');
+const guias = require('./app/routes/guias');
+const salas = require('./app/routes/salas');
+
+
 
 //Se inician las rutas con el controlador
 app.use('/personal',middleware.ensureAuthenticated, personal);
 app.use('/auth', auth);
 app.use('/inicio', index);
+app.use('/beepcons', beepcons);
+app.use('/exposiciones', exposiciones);
+app.use('/visitas', visitas);
+app.use('/reservas', reservas);
+app.use('/guias', guias);
+app.use('/salas', salas);
+
+
+//#################################
+app.get('/', (req, res) => {
+  res.redirect('/inicio');
+});
 
 app.get('/formulario', async (req, res) => {
   res.render('formulario', {})

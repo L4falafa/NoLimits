@@ -6,7 +6,7 @@
   "scripts": {
     "test": "node App.js",
     "nodemon": "nodemon App.js",
-    "start": "node App.js"
+    "start": "nodemon App.js"
   },
   "author": "Antu Ponturo",
   "license": "ISC",

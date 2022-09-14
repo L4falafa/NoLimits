@@ -1,4 +1,4 @@
-//dbUser.js
+//dbManager.js
 //Se encarga del manejo de la base de datos actualmente usando MySql
 const { query } = require('express');
 const mysql = require('mysql');
@@ -44,7 +44,14 @@ module.exports = {
             return error;   
         }
     },
-
+    getRowFromTable: async (tableName, id)=>{
+        qry = "SELECT * FROM "+tableName+" WHERE id = "+id;
+        try {
+            return await dbManager.mySqlQueryAsync(qry);
+        } catch (error) {
+            return error;   
+        }
+    },
     
     /**
     * Select fields passed by a array from a selected table from the database.
@@ -72,6 +79,65 @@ module.exports = {
             return await mySqlQueryAsync(qry);
         } catch (error) {
             
+            return error;
+        }
+    },
+    deleteFromTable: async (tableName, id)=>{
+        qry = "DELETE FROM "+tableName+" WHERE id = "+id;
+        try {
+            return await mySqlQueryAsync(qry);
+        } catch (error) {
+            return error;
+        }
+    },
+    insertToTable: async (tableName, fields, values)=>{
+        qry = "INSERT INTO "+tableName+" (";
+        try {
+            //Add each field to the query string
+            if(fields.length > 1){
+                for (let index = 0; index < fields.length; index++) {
+                    var x = fields[index];
+                    if(index!=fields.length-1)
+                        qry+= x+","
+                    else
+                        qry+= x
+                }
+            }else qry+= fields[0]
+            qry += ") VALUES (";
+            //Add each value to the query string
+            if(values.length > 1){
+                for (let index = 0; index < values.length; index++) {
+                    var x = values[index];
+                    if(index!=values.length-1)
+                        qry+= "'"+x+"',"
+                    else
+                        qry+= "'"+x+"'"
+                }
+            }else qry+= "'"+values[0]+"'"
+            qry += ")";
+            //returns the result
+            return await mySqlQueryAsync(qry);
+        } catch (error) {
+            return error;
+        }
+    },
+    updateTable: async (tableName, id, fields, values)=>{
+        qry = "UPDATE "+tableName+" SET ";
+        try {
+            //Add each field to the query string
+            if(fields.length > 1){
+                for (let index = 0; index < fields.length; index++) {
+                    var x = fields[index];
+                    if(index!=fields.length-1) 
+                        qry+= x+"='"+values[index]+"',"
+                    else
+                        qry+= x+"='"+values[index]+"'"
+                }
+            }else qry+= fields[0]+"='"+values[0]+"'"
+            qry += " WHERE id = "+id;
+            //returns the result
+            return await mySqlQueryAsync(qry);
+        } catch (error) {
             return error;
         }
     },
